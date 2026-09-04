@@ -62,7 +62,7 @@ function App() {
   useEffect(() => {
 
     // Account
-    fetch("http://127.0.0.1:8000/account")
+    fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/account")
       .then((res) => res.json())
       .then((data) => setAccount(data))
       .catch((error) => {
@@ -71,7 +71,7 @@ function App() {
 
 
     // AI Opportunity
-    fetch("http://127.0.0.1:8000/opportunity/AAPL")
+    fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/opportunity/AAPL")
       .then((res) => res.json())
       .then((data) => setOpportunity(data))
       .catch((error) => {
@@ -80,7 +80,7 @@ function App() {
 
 
     // Positions
-    fetch("http://127.0.0.1:8000/positions")
+    fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/positions")
       .then((res) => res.json())
       .then((data) => {
         setPositions(data.positions || []);
@@ -92,13 +92,13 @@ function App() {
 
 
     // Real option preview / TradeGuard risk check
-    fetch("http://127.0.0.1:8000/option-preview/AAPL")
+    fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/option-preview/AAPL")
       .then((res) => res.json())
       .then((data) => setOptionPreview(data))
       .catch((error) => console.error("Option preview API error:", error));
 
     // Recent Alpaca orders
-    fetch("http://127.0.0.1:8000/orders")
+    fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/orders")
       .then((res) => res.json())
       .then((data) => setOrders(data.orders || []))
       .catch((error) => console.error("Orders API error:", error));
@@ -141,14 +141,14 @@ function App() {
     setExecuteMessage("");
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/execute-option/AAPL",
+        "https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/execute-option/AAPL",
         { method: "POST" }
       );
       const data = await response.json();
       if (!response.ok) throw new Error(data?.detail || "Trade execution failed");
       setExecuteMessage(`Order ${data.status}: ${data.contract} @ $${data.limit_price}`);
 
-      const ordersResponse = await fetch("http://127.0.0.1:8000/orders");
+      const ordersResponse = await fetch("https://alpaca-ai-trading-hackathon-tradeguardai.onrender.com/orders");
       const ordersData = await ordersResponse.json();
       setOrders(ordersData.orders || []);
     } catch (error: any) {
